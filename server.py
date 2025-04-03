@@ -33,7 +33,7 @@ def handle_dialog(res, req):
 
     if req['session']['new']:
 
-        res['response']['text'] = 'ÐŸÑ€Ð¸Ð²ÐµÑ‚! Ð¯ Ð¼Ð¾Ð³Ñƒ ÑÐºÐ°Ð·Ð°Ñ‚ÑŒ Ð² ÐºÐ°ÐºÐ¾Ð¹ ÑÑ‚Ñ€Ð°Ð½Ðµ Ð³Ð¾Ñ€Ð¾Ð´ Ð¸Ð»Ð¸ ÑÐºÐ°Ð·Ð°Ñ‚ÑŒ Ñ€Ð°ÑÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ð¼ÐµÐ¶Ð´Ñƒ Ð³Ð¾Ñ€Ð¾Ð´Ð°Ð¼Ð¸!'
+        res['response']['text'] = 'Привет! Я могу сказать в какой стране город или сказать расстояние между городами!'
 
         return
 
@@ -41,20 +41,20 @@ def handle_dialog(res, req):
 
     if len(cities) == 0:
 
-        res['response']['text'] = 'Ð¢Ñ‹ Ð½Ðµ Ð½Ð°Ð¿Ð¸ÑÐ°Ð» Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð½Ðµ Ð¾Ð´Ð½Ð¾Ð³Ð¾ Ð³Ð¾Ñ€Ð¾Ð´Ð°!'
+        res['response']['text'] = 'Ты не написал название не одного города!'
 
     elif len(cities) == 1:
 
-        res['response']['text'] = 'Ð­Ñ‚Ð¾Ñ‚ Ð³Ð¾Ñ€Ð¾Ð´ Ð² ÑÑ‚Ñ€Ð°Ð½Ðµ - ' + get_country(cities[0])
+        res['response']['text'] = 'Этот город в стране - ' + get_country(cities[0])
 
     elif len(cities) == 2:
 
         distance = get_distance(get_coordinates(cities[0]), get_coordinates(cities[1]))
-        res['response']['text'] = 'Ð Ð°ÑÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ð¼ÐµÐ¶Ð´Ñƒ ÑÑ‚Ð¸Ð¼Ð¸ Ð³Ð¾Ñ€Ð¾Ð´Ð°Ð¼Ð¸: ' + str(round(distance)) + ' ÐºÐ¼.'
+        res['response']['text'] = 'Расстояние между этими городами: ' + str(round(distance)) + ' км.'
 
     else:
 
-        res['response']['text'] = 'Ð¡Ð»Ð¸ÑˆÐºÐ¾Ð¼ Ð¼Ð½Ð¾Ð³Ð¾ Ð³Ð¾Ñ€Ð¾Ð´Ð¾Ð²!'
+        res['response']['text'] = 'Слишком много городов!'
 
 
 def get_cities(req):
